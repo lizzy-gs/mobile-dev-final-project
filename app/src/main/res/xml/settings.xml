@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ListPreference
+        android:key="@string/pref_units_key"
+        android:title="@string/pref_units_title"
+        android:entries="@array/pref_units_entries"
+        android:entryValues="@array/pref_units_values"
+        android:defaultValue="@string/pref_units_default_value"
+        app:useSimpleSummaryProvider="true" />
+
+    <PreferenceCategory android:title="@string/pref_category_location">
+        <EditTextPreference
+            android:key="@string/pref_lat_key"
+            android:title="@string/pref_lat_title"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:key="@string/pref_lon_key"
+            android:title="@string/pref_lon_title"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+</androidx.preference.PreferenceScreen>
