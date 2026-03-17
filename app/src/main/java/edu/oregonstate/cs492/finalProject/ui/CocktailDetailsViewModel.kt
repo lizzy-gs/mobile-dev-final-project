@@ -1,32 +1,32 @@
-package edu.oregonstate.cs492.assignment4.ui
+package edu.oregonstate.cs492.finalProject.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import edu.oregonstate.cs492.assignment4.data.FiveDayForecast
-import edu.oregonstate.cs492.assignment4.data.FiveDayForecastRepository
-import edu.oregonstate.cs492.assignment4.data.OpenWeatherService
+import edu.oregonstate.cs492.finalProject.data.CocktailRepository
+import edu.oregonstate.cs492.finalProject.data.CocktailService
+import edu.oregonstate.cs492.finalProject.data.DetailedCocktailList
 import kotlinx.coroutines.launch
 
 /**
- * This is a ViewModel class that holds 5-day/3-hour forecast data for the main activity.
+ * This is a ViewModel class that holds current weather data for the UI.
  */
-class FiveDayForecastViewModel: ViewModel() {
-    private val repository = FiveDayForecastRepository(OpenWeatherService.create())
+class CocktailDetailsViewModel: ViewModel() {
+    private val repository = CocktailRepository(CocktailService.create())
 
     /*
-     * The most recent response from the OpenWeather 5-day/3-hour forecast API are stored in this
+     * The most recent response from the OpenWeather current weather API are stored in this
      * private property.  These results are exposed to the outside world in immutable form via the
      * public `forecast` property below.
      */
-    private val _forecast = MutableLiveData<FiveDayForecast?>(null)
+    private val _cocktailDetails = MutableLiveData<DetailedCocktailList?>(null)
 
     /**
-     * This value provides the most recent response from the OpenWeather 5-day/3-hour forecast API.
+     * This value provides the most recent response from the OpenWeather current weather API.
      * It is null if there are no current results (e.g. in the case of an error).
      */
-    val forecast: LiveData<FiveDayForecast?> = _forecast
+    val cocktailDetails: LiveData<DetailedCocktailList?> = _cocktailDetails
 
     /*
      * The current error for the most recent API query is stored in this private property.  This
@@ -53,28 +53,17 @@ class FiveDayForecastViewModel: ViewModel() {
      */
     val loading: LiveData<Boolean> = _loading
 
-    /**
-     * This method triggers a new call to the OpenWeather API's 5-day/3-hour forecast method.
-     * It updates the public properties of this ViewModel class to reflect the current status
-     * of the API query.
-     *
-     * @param lat Specifies the latitude of the location for which to fetch forecast data.
-     * @param lon Specifies the longitude of the location for which to fetch forecast data.
-     * @param units Specifies the type of units that should be returned by the OpenWeather API.
-     *   Can be one of: "standard", "metric", and "imperial".
-     * @param apiKey Should be a valid OpenWeather API key.
-     */
-    fun loadFiveDayForecast(lat: String?, lon: String?, units: String?, apiKey: String) {
+    fun loadCocktailDetails(id: String) {
         /*
          * Launch a new coroutine in which to execute the API call.  The coroutine is tied to the
          * lifecycle of this ViewModel by using `viewModelScope`.
          */
         viewModelScope.launch {
             _loading.value = true
-            val result = repository.loadFiveDayForecast(lat, lon, units, apiKey)
+            val result = repository.getCocktailDetails(id)
             _loading.value = false
             _error.value = result.exceptionOrNull()
-            _forecast.value = result.getOrNull()
+            _cocktailDetails.value = result.getOrNull()
         }
     }
 }

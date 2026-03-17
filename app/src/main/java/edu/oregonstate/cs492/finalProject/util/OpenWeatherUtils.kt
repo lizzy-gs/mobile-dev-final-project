@@ -1,4 +1,4 @@
-package edu.oregonstate.cs492.assignment4.util
+package edu.oregonstate.cs492.finalProject.util
 
 import java.util.Calendar
 import java.util.TimeZone

@@ -1,4 +1,4 @@
-package edu.oregonstate.cs492.assignment4
+package edu.oregonstate.cs492.finalProject
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

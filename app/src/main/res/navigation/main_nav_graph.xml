@@ -3,37 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/current_weather">
+    app:startDestination="@id/category_cocktail_list">
 
     <fragment
-        android:id="@+id/current_weather"
-        android:label="@string/label_current_weather"
-        android:name="edu.oregonstate.cs492.assignment4.ui.CurrentWeatherFragment">
+        android:id="@+id/category_cocktail_list"
+        android:label="@string/label_cocktail_list"
+        android:name="edu.oregonstate.cs492.finalProject.ui.CocktailListFragment">
+
         <action
-            android:id="@+id/navigate_to_five_day_forecast"
-            app:destination="@id/five_day_forecast"/>
-        <argument
-            android:name="location"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null"/>
-        <deepLink
-            app:uri="api.openweathermap.org/data/2.5/weather?q={location}"
-            android:autoVerify="true"/>
+            android:id="@+id/navigate_to_cocktail_details"
+            app:destination="@id/cocktail_details"/>
     </fragment>
 
     <fragment
-        android:id="@+id/five_day_forecast"
-        android:label="@string/label_five_day_forecast"
-        android:name="edu.oregonstate.cs492.assignment4.ui.FiveDayForecastFragment" />
+        android:id="@+id/cocktail_details"
+        android:label="@string/label_cocktail_details"
+        android:name="edu.oregonstate.cs492.finalProject.ui.CocktailDetailsFragment">
+        <argument
+            android:name="cocktail"
+            app:argType="edu.oregonstate.cs492.finalProject.data.ShortCocktail" />
+    </fragment>
 
     <fragment
         android:id="@+id/settings"
         android:label="@string/label_settings"
-        android:name="edu.oregonstate.cs492.assignment4.ui.SettingsFragment" />
-
-    <action
-        android:id="@+id/navigate_to_settings"
-        app:destination="@id/settings" />
+        android:name="edu.oregonstate.cs492.finalProject.ui.SettingsFragment">
+    </fragment>
 
 </navigation>

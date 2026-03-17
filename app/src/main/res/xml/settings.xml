@@ -4,22 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ListPreference
-        android:key="@string/pref_units_key"
-        android:title="@string/pref_units_title"
-        android:entries="@array/pref_units_entries"
-        android:entryValues="@array/pref_units_values"
-        android:defaultValue="@string/pref_units_default_value"
+        android:key="@string/pref_category_key"
+        android:title="@string/pref_category_title"
+        android:entries="@array/pref_category_entries"
+        android:entryValues="@array/pref_category_values"
+        android:defaultValue="@string/pref_category_default_value"
         app:useSimpleSummaryProvider="true" />
-
-    <PreferenceCategory android:title="@string/pref_category_location">
-        <EditTextPreference
-            android:key="@string/pref_lat_key"
-            android:title="@string/pref_lat_title"
-            app:useSimpleSummaryProvider="true" />
-        <EditTextPreference
-            android:key="@string/pref_lon_key"
-            android:title="@string/pref_lon_title"
-            app:useSimpleSummaryProvider="true" />
-    </PreferenceCategory>
 
 </androidx.preference.PreferenceScreen>

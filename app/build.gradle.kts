@@ -6,13 +6,13 @@ plugins {
 }
 
 android {
-    namespace = "edu.oregonstate.cs492.assignment4"
+    namespace = "edu.oregonstate.cs492.finalProject"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "edu.oregonstate.cs492.assignment4"
+        applicationId = "edu.oregonstate.cs492.finalProject"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

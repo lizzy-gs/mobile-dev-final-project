@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="pref_units_entries">
-        <item>@string/pref_units_entry_imperial</item>
-        <item>@string/pref_units_entry_metric</item>
-        <item>@string/pref_units_entry_standard</item>
+    <string-array name="pref_category_entries">
+        <item>@string/pref_category_entry_beer</item>
+        <item>@string/pref_category_entry_cocktail</item>
+        <item>@string/pref_category_entry_cocoa</item>
+        <item>@string/pref_category_entry_coffee_tea</item>
+        <item>@string/pref_category_entry_homemade_liqueur</item>
+        <item>@string/pref_category_entry_ordinary</item>
+        <item>@string/pref_category_entry_other</item>
+        <item>@string/pref_category_entry_party</item>
+        <item>@string/pref_category_entry_soft_drink</item>
     </string-array>
 
-    <string-array name="pref_units_values">
-        <item>@string/pref_units_value_imperial</item>
-        <item>@string/pref_units_value_metric</item>
-        <item>@string/pref_units_value_standard</item>
+    <string-array name="pref_category_values">
+        <item>@string/pref_category_value_beer</item>
+        <item>@string/pref_category_value_cocktail</item>
+        <item>@string/pref_category_value_cocoa</item>
+        <item>@string/pref_category_value_coffee_tea</item>
+        <item>@string/pref_category_value_homemade_liqueur</item>
+        <item>@string/pref_category_value_ordinary</item>
+        <item>@string/pref_category_value_other</item>
+        <item>@string/pref_category_value_party</item>
+        <item>@string/pref_category_value_shake</item>
+        <item>@string/pref_category_value_shot</item>
+        <item>@string/pref_category_value_soft_drink</item>
     </string-array>
 </resources>

@@ -1,22 +1,13 @@
-package edu.oregonstate.cs492.assignment4.ui
+package edu.oregonstate.cs492.finalProject.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -24,13 +15,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.progressindicator.CircularProgressIndicator
-import edu.oregonstate.cs492.assignment4.R
-import edu.oregonstate.cs492.roomgithubsearch.ui.SavedForecastCitiesViewModel
+import edu.oregonstate.cs492.finalProject.R
 
 /*
  * Often, we'll have sensitive values associated with our code, like API keys, that we'll want to
@@ -60,7 +47,6 @@ import edu.oregonstate.cs492.roomgithubsearch.ui.SavedForecastCitiesViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfig: AppBarConfiguration
-    private val savedCitiesViewModel: SavedForecastCitiesViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,34 +70,34 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = findViewById(R.id.nav_view)
         navView.setupWithNavController(navController)
 
-        val subMenu = navView.menu.findItem(R.id.saved_cities).subMenu
-        subMenu?.clear()
-
-        savedCitiesViewModel.savedCities.observe(this) { cities ->
-            subMenu?.clear()
-            val prefsEditor = PreferenceManager.getDefaultSharedPreferences(this).edit()
-
-            var id: Int = 0
-            for (city in cities) {
-                val menuItem = subMenu?.add(
-                    Menu.NONE,
-                    id,
-                    Menu.NONE,
-                    "${city.name} (${city.lat}, ${city.lon})")
-                id++
-
-                menuItem?.setOnMenuItemClickListener {
-                    prefsEditor.putString(getString(R.string.pref_lat_key), city.lat.toString())
-                    prefsEditor.putString(getString(R.string.pref_lon_key), city.lon.toString())
-                    prefsEditor.apply()
-
-                    navController.navigate(R.id.current_weather)
-
-                    drawerLayout.closeDrawers()
-                    true
-                }
-            }
-        }
+//        val subMenu = navView.menu.findItem(R.id.saved_cities).subMenu
+//        subMenu?.clear()
+//
+//        savedCitiesViewModel.savedCities.observe(this) { cities ->
+//            subMenu?.clear()
+//            val prefsEditor = PreferenceManager.getDefaultSharedPreferences(this).edit()
+//
+//            var id: Int = 0
+//            for (city in cities) {
+//                val menuItem = subMenu?.add(
+//                    Menu.NONE,
+//                    id,
+//                    Menu.NONE,
+//                    "${city.name} (${city.lat}, ${city.lon})")
+//                id++
+//
+//                menuItem?.setOnMenuItemClickListener {
+//                    prefsEditor.putString(getString(R.string.pref_lat_key), city.lat.toString())
+//                    prefsEditor.putString(getString(R.string.pref_lon_key), city.lon.toString())
+//                    prefsEditor.apply()
+//
+//                    navController.navigate(R.id.current_weather)
+//
+//                    drawerLayout.closeDrawers()
+//                    true
+//                }
+//            }
+//        }
 
 
         val appBar: MaterialToolbar = findViewById(R.id.top_app_bar)
