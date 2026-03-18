@@ -80,6 +80,22 @@ class CocktailRepository (
         }
     }
 
+    suspend fun getRandomCocktail(): Result<DetailedCocktailList?> {
+        return withContext(ioDispatcher) {
+            try {
+                val response = service.getRandomCocktail()
+                if (response.isSuccessful) {
+                    Result.success(response.body())
+                } else {
+                    Result.failure(Exception(response.errorBody()?.string()))
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Result.failure(e)
+            }
+        }
+    }
+
     private fun shouldFetchList(category: String): Boolean =
         cachedCocktails == null
                 || category != currentCategory

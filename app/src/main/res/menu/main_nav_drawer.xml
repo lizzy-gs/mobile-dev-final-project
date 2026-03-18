@@ -4,6 +4,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/random_cocktail"
+        android:title="@string/label_random_cocktail" />
+
+    <item
+        android:id="@+id/category_cocktail_list"
+        android:title="@string/label_cocktail_list" />
+
+    <item
         android:id="@+id/current_weather"
         android:title="@string/action_current_weather"
         android:icon="@drawable/ic_action_cloud"
