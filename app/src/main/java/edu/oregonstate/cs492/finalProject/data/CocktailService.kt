@@ -18,6 +18,9 @@ interface CocktailService {
         @Query("c") category: String
     ) : Response<ShortCocktailList>
 
+    @GET("random.php")
+    suspend fun getRandomCocktail() : Response<DetailedCocktailList>
+
     companion object {
         private const val BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/"
 

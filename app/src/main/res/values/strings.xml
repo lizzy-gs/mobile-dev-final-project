@@ -10,6 +10,8 @@
     <string name="label_cocktail_list">Cocktails</string>
     <string name="label_cocktail_details">Cocktail Details</string>
     <string name="label_settings">Settings</string>
+    <string name="label_random_cocktail">Random Cocktail</string>
+    <string name="action_shuffle">Shuffle</string>
 
     <string name="pref_category_entry_beer">Beer</string>
     <string name="pref_category_entry_cocktail">Cocktail</string>

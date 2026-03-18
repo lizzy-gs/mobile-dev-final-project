@@ -3,7 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/category_cocktail_list">
+    app:startDestination="@id/random_cocktail">
+
+    <fragment
+        android:id="@+id/random_cocktail"
+        android:label="@string/label_random_cocktail"
+        android:name="edu.oregonstate.cs492.finalProject.ui.RandomCocktailFragment" />
 
     <fragment
         android:id="@+id/category_cocktail_list"
