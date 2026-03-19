@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -26,7 +29,7 @@ import java.util.Locale
 class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
 
     private val viewModel: PhotosViewModel by viewModels()
-    private val photosAdapter = PhotosAdapter(::onDeleteClick)
+    private val photosAdapter = PhotosAdapter(::onPhotoClick, ::onDeleteClick)
 
     private lateinit var photosRV: RecyclerView
     private lateinit var emptyTV: TextView
@@ -38,8 +41,7 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
         ActivityResultContracts.TakePicture()
     ) { success ->
         if (success && currentPhotoPath != null) {
-            val photo = Photo(imagePath = currentPhotoPath!!)
-            viewModel.addPhoto(photo)
+            showDetailsDialog(currentPhotoPath!!)
         }
     }
 
@@ -102,6 +104,64 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
         val timestamp = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
         val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile("PHOTO_${timestamp}_", ".jpg", storageDir)
+    }
+
+    private fun showDetailsDialog(photoPath: String) {
+        val padding = 48
+
+        val layout = LinearLayout(requireContext()).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(padding, 24, padding, 8)
+        }
+
+        val captionInput = EditText(requireContext()).apply {
+            hint = getString(R.string.photo_caption_hint)
+        }
+
+        val descriptionInput = EditText(requireContext()).apply {
+            hint = "Description"
+            minLines = 2
+        }
+
+        val ingredientsInput = EditText(requireContext()).apply {
+            hint = "Ingredients (one per line)"
+            minLines = 3
+        }
+
+        val instructionsInput = EditText(requireContext()).apply {
+            hint = "Instructions"
+            minLines = 3
+        }
+
+        layout.addView(captionInput)
+        layout.addView(descriptionInput)
+        layout.addView(ingredientsInput)
+        layout.addView(instructionsInput)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Add Photo Details")
+            .setView(layout)
+            .setPositiveButton("Save") { _, _ ->
+                val photo = Photo(
+                    imagePath = photoPath,
+                    caption = captionInput.text.toString().trim().ifEmpty { null },
+                    description = descriptionInput.text.toString().trim().ifEmpty { null },
+                    ingredients = ingredientsInput.text.toString().trim().ifEmpty { null },
+                    instructions = instructionsInput.text.toString().trim().ifEmpty { null }
+                )
+                viewModel.addPhoto(photo)
+            }
+            .setNegativeButton("Skip") { _, _ ->
+                val photo = Photo(imagePath = photoPath)
+                viewModel.addPhoto(photo)
+            }
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun onPhotoClick(photo: Photo) {
+        val directions = PhotoGalleryFragmentDirections.navigateToPhotoDetails(photo)
+        findNavController().navigate(directions)
     }
 
     private fun onDeleteClick(photo: Photo) {

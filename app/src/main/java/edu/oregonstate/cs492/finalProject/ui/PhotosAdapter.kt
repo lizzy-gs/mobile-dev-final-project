@@ -16,6 +16,7 @@ import java.util.Date
 import java.util.Locale
 
 class PhotosAdapter(
+    private val onPhotoClick: (Photo) -> Unit,
     private val onDeleteClick: (Photo) -> Unit
 ) : RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
 
@@ -31,7 +32,7 @@ class PhotosAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.photo_list_item, parent, false)
-        return ViewHolder(view, onDeleteClick)
+        return ViewHolder(view, onPhotoClick, onDeleteClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -40,6 +41,7 @@ class PhotosAdapter(
 
     class ViewHolder(
         itemView: View,
+        private val onPhotoClick: (Photo) -> Unit,
         private val onDeleteClick: (Photo) -> Unit
     ) : RecyclerView.ViewHolder(itemView) {
         private val photoIV: ImageView = itemView.findViewById(R.id.iv_photo)
@@ -60,9 +62,14 @@ class PhotosAdapter(
                 .centerCrop()
                 .into(photoIV)
 
+            itemView.setOnClickListener {
+                onPhotoClick(photo)
+            }
+
             deleteBtn.setOnClickListener {
                 onDeleteClick(photo)
             }
         }
     }
 }
+
