@@ -15,7 +15,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -66,7 +66,7 @@ class PhotoGalleryFragment : Fragment(R.layout.fragment_photo_gallery) {
         fabCamera = view.findViewById(R.id.fab_camera)
 
         photosRV = view.findViewById(R.id.rv_photos)
-        photosRV.layoutManager = GridLayoutManager(requireContext(), 2)
+        photosRV.layoutManager = LinearLayoutManager(requireContext())
         photosRV.adapter = photosAdapter
 
         fabCamera.setOnClickListener {
