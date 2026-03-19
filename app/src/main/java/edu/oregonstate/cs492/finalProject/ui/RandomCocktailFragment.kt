@@ -1,13 +1,21 @@
 package edu.oregonstate.cs492.finalProject.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -83,6 +91,29 @@ class RandomCocktailFragment : Fragment(R.layout.fragment_random_cocktail) {
                 loadingIndicator.visibility = View.INVISIBLE
             }
         }
+
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+                menu.findItem(R.id.action_settings)?.isVisible = false
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_share -> {
+                        val currentCocktail = viewModel.randomCocktail.value?.drinks?.firstOrNull()
+
+                        currentCocktail?.let {
+                            share(it)
+                        } ?: Log.e("RandomCocktail", "No cocktail to share!")
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.STARTED)
+
     }
 
     override fun onResume() {
@@ -120,5 +151,15 @@ class RandomCocktailFragment : Fragment(R.layout.fragment_random_cocktail) {
             }
             ingredientsLL.addView(textView)
         }
+    }
+
+    private fun share(cocktail: DetailedCocktail) {
+        val shareText = getString(R.string.share_cocktail_text, cocktail.name)
+        val intent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, shareText)
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(intent, null))
     }
 }

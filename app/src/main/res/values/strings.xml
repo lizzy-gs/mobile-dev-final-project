@@ -58,7 +58,7 @@
     <string name="action_share">Share</string>
     <string name="action_settings">Settings</string>
 
-    <string name="share_weather_text">Current weather for %1$s: %2$s, %3$s</string>
+    <string name="share_cocktail_text">Checkout the %1$s Cocktail!</string>
 
     <!--
       - Preferences strings

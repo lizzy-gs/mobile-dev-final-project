@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import edu.oregonstate.cs492.finalProject.R
 
@@ -58,17 +60,25 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        //val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
 
         val navHostFragment = supportFragmentManager.findFragmentById(
             R.id.nav_host_fragment
         ) as NavHostFragment
         val navController = navHostFragment.navController
 
-        appBarConfig = AppBarConfiguration(navController.graph, drawerLayout)
+        val topLevelDestinations = setOf(R.id.category_cocktail_list, R.id.random_cocktail)
+        appBarConfig = AppBarConfiguration(topLevelDestinations)
 
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        navView.setupWithNavController(navController)
+        //val navView: NavigationView = findViewById(R.id.nav_view)
+        //navView.setupWithNavController(navController)
+
+        val bottomNav: BottomNavigationView = findViewById(R.id.bottom_nav)
+        bottomNav.setupWithNavController(navController)
+        bottomNav.setOnApplyWindowInsetsListener { view, insets ->
+            view.updatePadding(bottom = 0)
+            insets
+        }
 
 //        val subMenu = navView.menu.findItem(R.id.saved_cities).subMenu
 //        subMenu?.clear()
@@ -104,7 +114,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(appBar)
         setupActionBarWithNavController(navController, appBarConfig)
     }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfig) || super.onSupportNavigateUp()

@@ -3,10 +3,16 @@ package edu.oregonstate.cs492.finalProject.ui
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +37,28 @@ class CocktailListFragment: Fragment(R.layout.fragment_cocktail_list) {
         loadingIndicator = view.findViewById(R.id.loading_indicator)
 
         categoryTV = view.findViewById(R.id.tv_category)
+
+        /*
+        * Set up top app bar
+         */
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.main_menu, menu)
+                menu.findItem(R.id.action_share)?.isVisible = false
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.action_settings -> {
+                        val directions = CocktailListFragmentDirections.navigateToSettings()
+                        findNavController().navigate(directions)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.STARTED)
 
         /*
          * Set up RecyclerView.

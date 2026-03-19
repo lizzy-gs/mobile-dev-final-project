@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/random_cocktail">
+    app:startDestination="@id/category_cocktail_list">
 
     <fragment
         android:id="@+id/random_cocktail"
@@ -14,10 +14,12 @@
         android:id="@+id/category_cocktail_list"
         android:label="@string/label_cocktail_list"
         android:name="edu.oregonstate.cs492.finalProject.ui.CocktailListFragment">
-
         <action
             android:id="@+id/navigate_to_cocktail_details"
             app:destination="@id/cocktail_details"/>
+        <action
+            android:id="@+id/navigate_to_settings"
+            app:destination="@id/settings" />
     </fragment>
 
     <fragment
