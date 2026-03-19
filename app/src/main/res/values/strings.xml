@@ -43,4 +43,10 @@
     <string name="pref_category_default_value">@string/pref_category_value_cocktail</string>
     <string name="pref_category_key">category</string>
     <string name="pref_category_title">Category</string>
+
+    <string name="label_photo_gallery">Photos</string>
+    <string name="photo_empty_message">No photos yet.\nTap the camera button to take one!</string>
+    <string name="photo_delete_confirm">Delete this photo?</string>
+    <string name="photo_caption_hint">Add a caption…</string>
+    <string name="photo_no_caption">No caption</string>
 </resources>

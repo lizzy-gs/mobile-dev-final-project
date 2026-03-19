@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         ) as NavHostFragment
         val navController = navHostFragment.navController
 
-        val topLevelDestinations = setOf(R.id.category_cocktail_list, R.id.random_cocktail)
+        val topLevelDestinations = setOf(R.id.category_cocktail_list, R.id.random_cocktail, R.id.photo_gallery)
         appBarConfig = AppBarConfiguration(topLevelDestinations)
 
         //val navView: NavigationView = findViewById(R.id.nav_view)

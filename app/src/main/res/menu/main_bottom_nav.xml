@@ -10,4 +10,9 @@
         android:id="@+id/random_cocktail"
         android:icon="@drawable/outline_360_24"
         android:title="@string/label_random_cocktail" />
+
+    <item
+        android:id="@+id/photo_gallery"
+        android:icon="@drawable/ic_camera_24"
+        android:title="@string/label_photo_gallery" />
 </menu>

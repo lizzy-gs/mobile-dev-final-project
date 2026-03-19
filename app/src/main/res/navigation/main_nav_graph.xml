@@ -37,4 +37,9 @@
         android:name="edu.oregonstate.cs492.finalProject.ui.SettingsFragment">
     </fragment>
 
+    <fragment
+        android:id="@+id/photo_gallery"
+        android:label="@string/label_photo_gallery"
+        android:name="edu.oregonstate.cs492.finalProject.ui.PhotoGalleryFragment" />
+
 </navigation>
