@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:background="?attr/colorSurface"
     tools:context=".ui.CocktailListFragment">
 
     <TextView
         android:id="@+id/tv_category"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:textColor="?attr/colorPrimary"
+        android:textStyle="bold"
+        tools:text="Category: Margaritas" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -19,16 +28,23 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cocktail_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:paddingHorizontal="8dp"
+            android:clipToPadding="false"
+            android:paddingBottom="16dp" />
 
         <TextView
             android:id="@+id/tv_loading_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:textAppearance="?attr/textAppearanceBody1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="32dp"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
             android:textColor="?attr/colorError"
-            android:visibility="invisible" />
+            android:visibility="invisible"
+            tools:visibility="visible"
+            tools:text="Failed to load cocktails. Check your connection." />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loading_indicator"
@@ -36,8 +52,9 @@
             android:layout_height="wrap_content"
             android:indeterminate="true"
             android:layout_gravity="center"
+            app:indicatorSize="48dp"
+            app:trackThickness="4dp"
             android:visibility="invisible" />
 
     </FrameLayout>
-
 </LinearLayout>
