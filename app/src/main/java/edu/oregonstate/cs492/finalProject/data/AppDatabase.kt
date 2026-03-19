@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Photo::class], version = 1)
+@Database(entities = [Photo::class], version = 2)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun photoDao(): PhotoDao
@@ -17,7 +17,9 @@ abstract class AppDatabase: RoomDatabase() {
                 context,
                 AppDatabase::class.java,
                 "photo-db"
-            ).build()
+            )
+            .fallbackToDestructiveMigration()
+            .build()
 
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
